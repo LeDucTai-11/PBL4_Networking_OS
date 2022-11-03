@@ -24,9 +24,6 @@ public class ThreadServer extends Thread {
 		String input = "";
 		try {
 			input = dis.readUTF();
-			if(isNumber(input) == false) {
-				incoming.close();
-			}
 			System.out.println("Input: "+input);
 			dos.writeUTF(CalendarController.printCalendar(Integer.parseInt(input)));
 		}catch(IOException ex) {
@@ -36,14 +33,5 @@ public class ThreadServer extends Thread {
 				e.printStackTrace();
 			}
 		}
-	}
-	public boolean isNumber(String s) {
-		boolean check = true;
-		try {
-			int number = Integer.parseInt(s);
-		}catch(Exception e) {
-			check = false;
-		}
-		return check;
 	}
 }

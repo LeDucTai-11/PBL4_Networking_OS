@@ -93,7 +93,7 @@ public class ClientFrame implements ActionListener {
 		separator.setBounds(0, 44, 637, 2);
 		frame.getContentPane().add(separator);
 		
-		lblmsg = new JLabel("New");
+		lblmsg = new JLabel("");
 		lblmsg.setForeground(Color.RED);
 		lblmsg.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		lblmsg.setBounds(203, 265, 361, 36);
@@ -106,14 +106,30 @@ public class ClientFrame implements ActionListener {
 			if(txtYear.getText().equals("")) {
 				lblmsg.setText("Please enter a year");
 			}else {
-				try {
-					this.dos.writeUTF(txtYear.getText());
-					this.frame.dispose();
-				}catch(Exception ex) {
-					ex.printStackTrace();
+				if(isNumber(txtYear.getText()) == true) {
+					try {
+						this.dos.writeUTF(txtYear.getText());
+						this.frame.dispose();
+					}catch(Exception ex) {
+						ex.printStackTrace();
+					}
+				}else {
+					lblmsg.setText("Input is not a year");
 				}
 			}
 		}
 		
+	}
+	public boolean isNumber(String s) {
+		boolean check = true;
+		try {
+			int number = Integer.parseInt(s);
+			if(number <= 0) {
+				check = false;
+			}
+		}catch(Exception e) {
+			check = false;
+		}
+		return check;
 	}
 }
