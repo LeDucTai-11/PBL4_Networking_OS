@@ -1,13 +1,7 @@
 package client;
 public class LichAm {
     public static final double PI = Math.PI;
-    /**
-     *
-     * @param dd
-     * @param mm
-     * @param yy
-     * @return the number of days since 1 January 4713 BC (Julian calendar)
-     */
+
     public static int jdFromDate(int dd, int mm, int yy) {
         int a = (14 - mm) / 12;
         int y = yy+4800-a;
@@ -16,15 +10,9 @@ public class LichAm {
         if (jd < 2299161) {
             jd = dd + (153*m+2)/5 + 365*y + y/4 - 32083;
         }
-        //jd = jd - 1721425;
         return jd;
     }
-    /**
-     * http://www.tondering.dk/claus/calendar.html
-     * Section: Is there a formula for calculating the Julian day number?
-     * @param jd - the number of days since 1 January 4713 BC (Julian calendar)
-     * @return
-     */
+
     public static int[] jdToDate(int jd) {
         int a, b, c;
         if (jd > 2299160) { // After 5/10/1582, Gregorian calendar
@@ -43,16 +31,11 @@ public class LichAm {
         int year = b*100 + d - 4800 + m/10;
         return new int[]{day, month, year};
     }
-    /**
-     * Solar longitude in degrees
-     * Algorithm from: Astronomical Algorithms, by Jean Meeus, 1998
-     * @param jdn - number of days since noon UTC on 1 January 4713 BC
-     * @return
-     */
+
     public static double SunLongitude(double jdn) {
-        //return CC2K.sunLongitude(jdn);
         return SunLongitudeAA98(jdn);
     }
+    
     public static double SunLongitudeAA98(double jdn) {
         double T = (jdn - 2451545.0 ) / 36525; // Time in Julian centuries from 2000-01-01 12:00:00 GMT
         double T2 = T*T;
@@ -66,16 +49,9 @@ public class LichAm {
         return L;
     }
     public static double NewMoon(int k) {
-        //return CC2K.newMoonTime(k);
         return NewMoonAA98(k);
     }
-    /**
-     * Julian day number of the kth new moon after (or before) the New Moon of 1900-01-01 13:51 GMT.
-     * Accuracy: 2 minutes
-     * Algorithm from: Astronomical Algorithms, by Jean Meeus, 1998
-     * @param k
-     * @return the Julian date number (number of days since noon UTC on 1 January 4713 BC) of the New Moon
-     */
+ 
 
     public static double NewMoonAA98(int k) {
         double T = k/1236.85; // Time in Julian centuries from 1900 January 0.5

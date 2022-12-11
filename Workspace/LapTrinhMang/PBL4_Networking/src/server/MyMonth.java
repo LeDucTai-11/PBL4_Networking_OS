@@ -1,6 +1,6 @@
 package server;
 
-public class MonthController {
+public class MyMonth {
 	public static String getNameOfMonth(int month) {
 		String months[] = {"January", "February", "March",
                 "April", "May", "June",
@@ -11,7 +11,4 @@ public class MonthController {
 		return (months[month-1]);
 	}
 	
-	/*
-		Công thức Zeller
-	 */
 }

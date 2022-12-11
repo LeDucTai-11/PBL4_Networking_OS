@@ -25,7 +25,7 @@ public class ThreadServer extends Thread {
 		try {
 			input = dis.readUTF();
 			System.out.println("Input: "+input);
-			dos.writeUTF(CalendarController.printCalendar(Integer.parseInt(input)));
+			dos.writeUTF(MyCalendar.printCalendar(Integer.parseInt(input)));
 		}catch(IOException ex) {
 			try {
 				incoming.close();

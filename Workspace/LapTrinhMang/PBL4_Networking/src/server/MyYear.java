@@ -1,6 +1,6 @@
 package server;
 
-public class YearController {
+public class MyYear {
 
 	public static boolean check_leap_year(int year) {
 		if (year % 400 == 0 ||
