@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class PrintCalendar implements ActionListener {
 
@@ -23,7 +25,7 @@ public class PrintCalendar implements ActionListener {
 	public ArrayList<String> dataMonths = new ArrayList<String>();
 	public ArrayList<Integer> dateOfMonth = new ArrayList<Integer>();
 	private JButton btnLeft,btnRight;
-	private JLabel lblMonth;
+	private JComboBox<String> cbbMonth;
 	public int month = 1,year;
 	private JLabel lblNewLabel;
 	
@@ -83,12 +85,6 @@ public class PrintCalendar implements ActionListener {
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		
-		lblMonth = new JLabel("Tháng 1");
-		lblMonth.setForeground(Color.RED);
-		lblMonth.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		lblMonth.setBounds(371, 10, 92, 39);
-		frame.getContentPane().add(lblMonth);
-		
 		initPanel();
 		frame.getContentPane().add(panel);
 		
@@ -105,7 +101,7 @@ public class PrintCalendar implements ActionListener {
 		frame.getContentPane().add(btnRight);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 47, 820, 2);
+		separator.setBounds(10, 59, 820, 2);
 		frame.getContentPane().add(separator);
 		
 		btnLeft.setEnabled(false);
@@ -115,6 +111,14 @@ public class PrintCalendar implements ActionListener {
 		lblNewLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		lblNewLabel.setBounds(676, 10, 141, 39);
 		frame.getContentPane().add(lblNewLabel);
+		
+		cbbMonth = new JComboBox<String>();
+		cbbMonth.setForeground(Color.RED);
+		cbbMonth.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		cbbMonth.setModel(new DefaultComboBoxModel<String>(new String[] {"Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"}));
+		cbbMonth.setBounds(343, 10, 169, 39);
+		cbbMonth.addActionListener(this);
+		frame.getContentPane().add(cbbMonth);
 		frame.setVisible(true);
 		
 	}
@@ -153,7 +157,7 @@ public class PrintCalendar implements ActionListener {
 				label.setText(dateOfMonth.get(i)+"");
 				label.setFont(new Font("arial", Font.BOLD, 14));
 				label2.setText(LichAm.convertSolar2Lunar(dateOfMonth.get(i), month, year));
-				label2.setFont(new Font("arial", Font.ITALIC, 10));
+				label2.setFont(new Font("arial", Font.ITALIC, 11));
 			}
 		}
 	}
@@ -188,9 +192,12 @@ public class PrintCalendar implements ActionListener {
 		if (e.getSource() == btnRight) {
 			month++;
 		}
+		if(e.getSource() == cbbMonth) {
+			month = cbbMonth.getSelectedIndex() + 1;
+		}
 		setEnableButton();
 		addGUI();
-		lblMonth.setText("Tháng " + month);
+		cbbMonth.setSelectedIndex(month - 1);
 //		setStartDate(1, month, year);
 	}
 	
