@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 
 public class ClientFrame implements ActionListener {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField txtYear;
 	private JButton btnSend;
 	private JLabel lblmsg;
@@ -109,9 +109,15 @@ public class ClientFrame implements ActionListener {
 				if(isNumber(txtYear.getText()) == true) {
 					try {
 						this.dos.writeUTF(txtYear.getText());
-						this.frame.dispose();
-					}catch(Exception ex) {
-						ex.printStackTrace();
+						txtYear.setText("");
+						lblmsg.setText("");
+					}catch(Exception err) {
+						err.printStackTrace();
+						try {
+							this.soc.close();
+						}catch (Exception ex) {
+							ex.printStackTrace();
+						}
 					}
 				}else {
 					lblmsg.setText("Input is not a year");

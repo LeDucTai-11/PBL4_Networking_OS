@@ -81,7 +81,7 @@ public class PrintCalendar implements ActionListener {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 854, 531);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		

@@ -9,11 +9,13 @@ public class ThreadClient extends Thread {
 	public void run() {
 		String input = "";
 		try {
-			input = this.client.dis.readUTF();
-			new PrintCalendar(input);
-			this.client.soc.close();
+			while(true) {
+				input = this.client.dis.readUTF();
+				new PrintCalendar(input);
+			}
 		}catch(Exception ex) {
 			ex.printStackTrace();
+			this.client.frame.dispose();
 		}
 	}
 }

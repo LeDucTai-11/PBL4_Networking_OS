@@ -23,9 +23,11 @@ public class ThreadServer extends Thread {
 	public synchronized void run() {
 		String input = "";
 		try {
-			input = dis.readUTF();
-			System.out.println("Input: "+input);
-			dos.writeUTF(MyCalendar.printCalendar(Integer.parseInt(input)));
+			while(true) {
+				input = dis.readUTF();
+				System.out.println("Input: "+input);
+				dos.writeUTF(MyCalendar.printCalendar(Integer.parseInt(input)));
+			}
 		}catch(IOException ex) {
 			try {
 				incoming.close();
